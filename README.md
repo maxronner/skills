@@ -39,6 +39,32 @@ npx skills@latest add mattpocock/skills
 
 4. Bam - you're ready to go.
 
+## Local development installers
+
+When working from a local clone, link skills into local agents with:
+
+```bash
+./scripts/link-claude-skills.sh  # Claude CLI: ~/.claude/skills
+./scripts/link-pi-skills.sh  # pi CLI: ~/.pi/agent/skills
+./scripts/link-codex-skills.sh # Codex CLI: ~/.codex/skills
+```
+
+Each installer also accepts bucket filters:
+
+```bash
+./scripts/link-pi-skills.sh --engineering --deprecated
+./scripts/link-claude-skills.sh -p # productivity only
+./scripts/link-codex-skills.sh --misc --quiet # with no per-skill output
+```
+
+Destination is an optional final positional argument (or use defaults for each script):
+
+```bash
+./scripts/link-pi-skills.sh /custom/skills --engineering
+./scripts/link-codex-skills.sh /custom/skills --misc --quiet
+```
+
+
 ## Why These Skills Exist
 
 I built these skills as a way to fix common failure modes I see with Claude Code, Codex, and other coding agents.
@@ -165,6 +191,7 @@ General workflow tools, not code-specific.
 - **[grill-me](./skills/productivity/grill-me/SKILL.md)** — Get relentlessly interviewed about a plan or design until every branch of the decision tree is resolved.
 - **[handoff](./skills/productivity/handoff/SKILL.md)** — Compact the current conversation into a handoff document so another agent can continue the work.
 - **[write-a-skill](./skills/productivity/write-a-skill/SKILL.md)** — Create new skills with proper structure, progressive disclosure, and bundled resources.
+- **[zk-notebook](./skills/productivity/zk-notebook/SKILL.md)** — Use the `zk` CLI to search, inspect, create, and maintain zettelkasten notes.
 
 ### Misc
 
