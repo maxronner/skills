@@ -6,6 +6,9 @@ link_skills_to() {
   local quiet="${2:-0}"
   shift 2
   local -a include_buckets=("$@")
+  if ((${#include_buckets[@]} == 0)); then
+    include_buckets=("engineering" "productivity")
+  fi
   local repo="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
   local src name target
 
@@ -78,9 +81,7 @@ link_skills_cli() {
       -p|--productivity)
         buckets+=("productivity")
         ;;
-      -d|--deprecated)
-        buckets+=("deprecated")
-        ;;
+
       -e|--engineering)
         buckets+=("engineering")
         ;;
@@ -92,10 +93,9 @@ link_skills_cli() {
         echo ""
         echo "Link skills into your local $client installation."
         echo ""
-        echo "Bucket filters (defaults to all):"
+        echo "Bucket filters (defaults to engineering + productivity):"
         echo "  -m, --misc"
         echo "  -p, --productivity"
-        echo "  -d, --deprecated"
         echo "  -e, --engineering"
         echo "      --personal"
         echo ""

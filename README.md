@@ -12,7 +12,7 @@
 
 [![skills.sh](https://skills.sh/b/mattpocock/skills)](https://skills.sh/mattpocock/skills)
 
-My agent skills that I use every day to do real engineering - not vibe coding.
+My curated agent skills for doing real engineering - not vibe coding.
 
 Developing real applications is hard. Approaches like GSD, BMAD, and Spec-Kit try to help by owning the process. But while doing so, they take away your control and make bugs in the process hard to resolve.
 
@@ -49,19 +49,19 @@ When working from a local clone, link skills into local agents with:
 ./scripts/link-codex-skills.sh # Codex CLI: ~/.codex/skills
 ```
 
-Each installer also accepts bucket filters:
+By default, installers link active skills (`engineering` + `productivity`). They also accept bucket filters:
 
 ```bash
-./scripts/link-pi-skills.sh --engineering --deprecated
+./scripts/link-pi-skills.sh --engineering
 ./scripts/link-claude-skills.sh -p # productivity only
-./scripts/link-codex-skills.sh --misc --quiet # with no per-skill output
+./scripts/link-codex-skills.sh --engineering --productivity --quiet # with no per-skill output
 ```
 
 Destination is an optional final positional argument (or use defaults for each script):
 
 ```bash
 ./scripts/link-pi-skills.sh /custom/skills --engineering
-./scripts/link-codex-skills.sh /custom/skills --misc --quiet
+./scripts/link-codex-skills.sh /custom/skills --productivity --quiet
 ```
 
 
@@ -191,13 +191,3 @@ General workflow tools, not code-specific.
 - **[grill-me](./skills/productivity/grill-me/SKILL.md)** — Get relentlessly interviewed about a plan or design until every branch of the decision tree is resolved.
 - **[handoff](./skills/productivity/handoff/SKILL.md)** — Compact the current conversation into a handoff document so another agent can continue the work.
 - **[write-a-skill](./skills/productivity/write-a-skill/SKILL.md)** — Create new skills with proper structure, progressive disclosure, and bundled resources.
-- **[zk-notebook](./skills/productivity/zk-notebook/SKILL.md)** — Use the `zk` CLI to search, inspect, create, and maintain zettelkasten notes.
-
-### Misc
-
-Tools I keep around but rarely use.
-
-- **[git-guardrails-claude-code](./skills/misc/git-guardrails-claude-code/SKILL.md)** — Set up Claude Code hooks to block dangerous git commands (push, reset --hard, clean, etc.) before they execute.
-- **[migrate-to-shoehorn](./skills/misc/migrate-to-shoehorn/SKILL.md)** — Migrate test files from `as` type assertions to @total-typescript/shoehorn.
-- **[scaffold-exercises](./skills/misc/scaffold-exercises/SKILL.md)** — Create exercise directory structures with sections, problems, solutions, and explainers.
-- **[setup-pre-commit](./skills/misc/setup-pre-commit/SKILL.md)** — Set up Husky pre-commit hooks with lint-staged, Prettier, type checking, and tests.

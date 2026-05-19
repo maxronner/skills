@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Links all skills in the repository to ~/.claude/skills, so that
+# Links active skills in the repository to ~/.claude/skills, so that
 # they can be used by the local Claude CLI.
 
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
@@ -23,7 +23,7 @@ fi
 
 mkdir -p "$DEST"
 
-find "$REPO/skills" -name SKILL.md -not -path '*/node_modules/*' -not -path '*/deprecated/*' -print0 |
+find "$REPO/skills" \( -path '*/engineering/*' -o -path '*/productivity/*' \) -name SKILL.md -not -path '*/node_modules/*' -print0 |
 while IFS= read -r -d '' skill_md; do
   src="$(dirname "$skill_md")"
   name="$(basename "$src")"
