@@ -75,18 +75,11 @@ link_skills_cli() {
       -q|--quiet)
         quiet=1
         ;;
-      -m|--misc)
-        buckets+=("misc")
-        ;;
       -p|--productivity)
         buckets+=("productivity")
         ;;
-
       -e|--engineering)
         buckets+=("engineering")
-        ;;
-      --personal)
-        buckets+=("personal")
         ;;
       -h|--help)
         echo "Usage: $(basename "$0") [options] [destination]"
@@ -94,10 +87,8 @@ link_skills_cli() {
         echo "Link skills into your local $client installation."
         echo ""
         echo "Bucket filters (defaults to engineering + productivity):"
-        echo "  -m, --misc"
         echo "  -p, --productivity"
         echo "  -e, --engineering"
-        echo "      --personal"
         echo ""
         echo "Other options:"
         echo "  -q, --quiet     Suppress per-skill output"
