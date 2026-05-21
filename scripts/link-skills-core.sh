@@ -81,6 +81,9 @@ link_skills_cli() {
       -e|--engineering)
         buckets+=("engineering")
         ;;
+      --personal)
+        buckets+=("personal")
+        ;;
       -h|--help)
         echo "Usage: $(basename "$0") [options] [destination]"
         echo ""
@@ -89,6 +92,7 @@ link_skills_cli() {
         echo "Bucket filters (defaults to engineering + productivity):"
         echo "  -p, --productivity"
         echo "  -e, --engineering"
+        echo "      --personal"
         echo ""
         echo "Other options:"
         echo "  -q, --quiet     Suppress per-skill output"
