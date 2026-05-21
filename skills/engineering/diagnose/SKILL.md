@@ -30,6 +30,14 @@ Spend disproportionate effort here. **Be aggressive. Be creative. Refuse to give
 
 Build the right feedback loop, and the bug is 90% fixed.
 
+### Prefer a named diagnostic command
+
+If the repro or inspection path needs more than one ad-hoc command, stop and consider whether the repo should expose a narrow diagnostic command before continuing.
+
+For app, service, provider, cache, or daemon bugs, prefer a command that prints the relevant live state, provider state, cache state, recent filtered logs, and a safe force-refresh/retry action when applicable.
+
+If the repo already has task runners such as `just`, `make`, or `npm scripts`, add or recommend the command there instead of relying on chat history.
+
 ### Iterate on the loop itself
 
 Treat the loop as a product. Once you have _a_ loop, ask:
@@ -86,6 +94,8 @@ Tool preference:
 
 **Tag every debug log** with a unique prefix, e.g. `[DEBUG-a4f2]`. Cleanup at the end becomes a single grep. Untagged logs survive; tagged logs die.
 
+Prefer queryable state over logs when debugging long-lived services. For UI daemons and background services, add a temporary or permanent status endpoint, IPC method, or debug command when it materially improves the feedback loop. Logs explain history; status explains current state.
+
 **Perf branch.** For performance regressions, logs are usually wrong. Instead: establish a baseline measurement (timing harness, `performance.now()`, profiler, query plan), then bisect. Measure first, fix second.
 
 ## Phase 5 — Fix + regression test
@@ -112,6 +122,15 @@ Required before declaring done:
 - [ ] Regression test passes (or absence of seam is documented)
 - [ ] All `[DEBUG-...]` instrumentation removed (`grep` the prefix)
 - [ ] Throwaway prototypes deleted (or moved to a clearly-marked debug location)
+- [ ] If diagnosis used repeated ad-hoc commands, either added a repo-local diagnostic command or explicitly recommended one
 - [ ] The hypothesis that turned out correct is stated in the commit / PR message — so the next debugger learns
+
+For cache/provider bugs, verify all three states separately:
+
+1. Cache contents on disk
+2. Provider/live fetch result
+3. Rendered application state
+
+Do not treat “cache exists” or “provider is up” as proof the rendered state updated.
 
 **Then ask: what would have prevented this bug?** If the answer involves architectural change (no good test seam, tangled callers, hidden coupling) hand off to the `/improve-codebase-architecture` skill with the specifics. Make the recommendation **after** the fix is in, not before — you have more information now than when you started.
