@@ -1,41 +1,45 @@
 ---
 name: lookup-memory
-description: Use when a task may benefit from durable user or project memory after grounding in the current repository. Check repo-local instructions, docs, source, config, tests, and tooling first; search configured notebooks when prior decisions, preferences, cross-repo context, or reusable procedures could affect the answer. Write only when explicitly asked to save, curate, import, or process memory.
+description: Interact with the user's durable memory substrate without treating chat recall as truth. Use when prior decisions, preferences, cross-repo context, reusable procedures, or explicit save/curate/import requests could affect the work; ground in the current repo first, use available memory interfaces, and write only when asked.
 ---
 
 # Lookup Memory
 
-Ground in the current repository first. Use durable notebook memory as additional context for prior decisions, preferences, cross-repo patterns, or reusable procedures.
+Use durable memory as a substrate: discover the available interface, follow its local rules, search/read selectively, and cite what influenced the answer.
 
-## Source Order
+## Default Order
 
-1. Current repo instructions, docs, code, config, tests, and local tooling.
-2. Notebook-local instructions for any memory source you use.
-3. Notebook search, indexes, MCP/API, wrapper tools, or direct files when that is the notebook's normal interface.
-4. Chat history or model recall only as hints, never as source of truth.
+1. Ground in the current repo first: instructions, docs, code, config, tests, and tooling.
+2. Decide whether memory could change the answer. If not, skip memory.
+3. Discover candidate memory interfaces from user-provided paths/tools, repo or home instructions, MCP/API tools, wrappers, and installed CLIs.
+4. Load tool references only for tools that are both relevant and available; if absent, skip the reference.
+5. Read local instructions for any substrate you use before reading or writing notes.
+6. Prefer the substrate's normal interface (wrapper, MCP/API, index, `zk`, search tool) over raw file access.
+7. Treat chat history and model recall as search hints only, never as source of truth.
 
 If repo-local facts conflict with memory, prefer the repo and mention the conflict when it matters.
 
-## Lookup
+## Lookup Workflow
 
-1. Find the relevant notebook from local instructions, user-provided paths, environment, or available memory tools.
-2. Read the notebook's local instructions before using it.
-3. Prefer the notebook's own tools, wrappers, indexes, MCP/API, or search interface over ad hoc file access.
-4. Search memory when repo grounding leaves relevant context unknown or when prior decisions, preferences, or cross-repo patterns could change the answer.
-5. When memory influenced the answer, mention the note title, id, tool result, or source path.
+1. Locate the substrate and its local rules.
+2. Search broadly, then narrow by title/tag/path/date/linkage when the interface supports it.
+3. Read only the notes or records needed for the task.
+4. When memory influenced the answer, cite the note title, id, tool result, or source path.
+5. If no relevant memory is found, continue from repo facts rather than over-searching.
 
-## Write
+## Write Workflow
 
-Write only when the user asks to save, curate, import, or process memory.
+Write only when the user explicitly asks to save, curate, import, or process memory.
 
-1. Use the notebook's local creation workflow.
-2. Search for duplicates first.
-3. Follow local schema, taxonomy, linking, and validation rules.
-4. Validate with the notebook's own checker when available.
+1. Search for duplicates first.
+2. Follow local schema, taxonomy, linking, naming, and validation rules.
+3. Use the substrate's creation/update workflow; do not invent paths or hand-roll metadata when a tool can create it.
+4. Validate with the substrate's checker, index, or list/search command when available.
+5. Report what was written and where.
 
 ## Boundaries
 
-- Do not invent notebook taxonomy, schema, or storage layout.
+- Do not invent notebook taxonomy, schema, storage layout, or backlinks.
 - Do not process inbox, raw, or import folders unless asked.
-- Do not hand-write notes when a local workflow exists.
-- Do not treat chat history or model recall as a substitute for repo or notebook grounding.
+- Do not silently save project facts just because you learned them.
+- Do not use memory as a substitute for repo-local grounding.
