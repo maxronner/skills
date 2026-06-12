@@ -157,7 +157,6 @@ Skills I use daily for code work.
 - **[diagnose](./skills/engineering/diagnose/SKILL.md)** — Disciplined diagnosis loop for hard bugs and performance regressions: reproduce → minimise → hypothesise → instrument → fix → regression-test.
 - **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)** — Grilling session that challenges your plan against the existing domain model, sharpens terminology, and updates `CONTEXT.md` and ADRs inline.
 - **[triage](./skills/engineering/triage/SKILL.md)** — Triage issues through a state machine of triage roles.
-- **[docs-vacuum](./skills/engineering/docs-vacuum/SKILL.md)** — Audit repository docs for stale, duplicate, contradictory, or orphaned content; propose keep/update/merge/delete actions before editing.
 - **[frontend-design](./skills/engineering/frontend-design/SKILL.md)** — Build distinctive, production-grade frontend interfaces with strong visual direction and polished interaction details.
 - **[improve-agents-md](./skills/engineering/improve-agents-md/SKILL.md)** — Tighten repository `AGENTS.md` or `CLAUDE.md` instructions down to minimal, repo-specific requirements that help future agents without adding unnecessary exploration or cost.
 - **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/SKILL.md)** — Find deepening opportunities in a codebase, informed by the domain language in `CONTEXT.md` and the decisions in `docs/adr/`.
